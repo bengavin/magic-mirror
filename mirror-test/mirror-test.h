@@ -2,13 +2,13 @@
 #define MIRROR_H
 
 
-enum mode_t {
+enum mirror_mode_t {
   MODE_OFF = 0,
   MODE_GOOD = 1,
   MODE_BAD = 2
 };
 
-enum wave_t {
+enum wave_state_t {
   WAVE_STEADY,
   WAVE_RISING,
   WAVE_FALLING
