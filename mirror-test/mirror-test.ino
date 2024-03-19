@@ -90,6 +90,7 @@ void setup() {
   Serial.println("Assigning Front Buckets...");
   #endif
 
+/* Don't worry about bucketing the front LEDs, they stay solid on
   uint8_t fbuckets[NUMBER_OF_BUCKETS] = { 
     FRONT_LEDS_PER_BUCKET + 1, // 0s
     FRONT_LEDS_PER_BUCKET + 1, // 1s
@@ -105,6 +106,7 @@ void setup() {
     front_led_bucket[i] = bucket; 
     fbuckets[bucket]--;
   }
+*/
 
   #ifdef SERIAL_DEBUG
   Serial.println("Buckets Assigned...");
@@ -161,6 +163,7 @@ void drawBrightness(uint64_t currentMillis) {
 
   for (int i = 0; i < (FRONTCOUNT); i++) {
     // which 'timeslot' are you in [1/3 of the pixels follow together]
+    /*
     int slot = front_led_bucket[i]; //i % 7;
     uint8_t sineOffset = frameSineOffset;
     switch (slot)
@@ -182,37 +185,23 @@ void drawBrightness(uint64_t currentMillis) {
     //Serial.print(F("Sine Val"));
     //Serial.println(sineVal);
     //uint32_t gammaR = frontpixels.gamma32(pixelColor * sineVal / 255.0);
+    */
 
     //if (i < (FRONTCOUNT))
     //{
-      frontpixels.setPixelColor(
+      /*frontpixels.setPixelColor(
         i, 
         frontpixels.gamma8((uint8_t)(r * sineVal)),
         frontpixels.gamma8((uint8_t)(g * sineVal)),
         frontpixels.gamma8((uint8_t)(b * sineVal))
-        );
-      /*frontpixels.setPixelColor(
-        i, 
-        (uint8_t)(r * sineVal),
-        (uint8_t)(g * sineVal),
-        (uint8_t)(b * sineVal)
         );*/
-    //}
-
-    //if (i < (BACKCOUNT))
-    //{
-    //  backpixels.setPixelColor(
-    //    i, 
-    //    frontpixels.gamma8((uint8_t)(r * sineVal)),
-    //    frontpixels.gamma8((uint8_t)(g * sineVal)),
-    //    frontpixels.gamma8((uint8_t)(b * sineVal))
-    //    );
-    //  /*backpixels.setPixelColor(
-    //    i, 
-    //    (uint8_t)(r * sineVal),
-    //    (uint8_t)(g * sineVal),
-    //    (uint8_t)(b * sineVal)
-    //    );*/
+        // don't dim the front pixels, stay solid on
+      frontpixels.setPixelColor(
+        i, 
+        frontpixels.gamma8(r * 0.75),
+        frontpixels.gamma8(g * 0.75),
+        frontpixels.gamma8(b * 0.75)
+        );
     //}
   }
 
